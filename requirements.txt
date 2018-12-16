@@ -1,0 +1,10 @@
+Click==7.0
+Flask==1.0.2
+itsdangerous==1.1.0
+Jinja2==2.10
+MarkupSafe==1.1.0
+pybald-routes==2.11
+redis==3.0.1
+repoze.lru==0.7
+six==1.12.0
+Werkzeug==0.14.1
