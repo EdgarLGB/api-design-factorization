@@ -1,0 +1,40 @@
+redis:
+  image: 'redis'
+  expose:
+    - 6379
+
+fact_service1:
+  image: 'factor_app'
+  links:
+    - redis
+  expose:
+    - 5000
+  environment:
+    - WORKER_NUM=4
+    - REDIS_HOST=redis
+    - REDIS_PORT=6379
+    - REDIS_MAX_CONN=5
+    - FLASK_APP=app/app.py
+    - FLASK_DEBUG=1
+
+fact_service2:
+  image: 'factor_app'
+  links:
+    - redis
+  expose:
+    - 5000
+  environment:
+    - WORKER_NUM=4
+    - REDIS_HOST=redis
+    - REDIS_PORT=6379
+    - REDIS_MAX_CONN=5
+    - FLASK_APP=app/app.py
+    - FLASK_DEBUG=1
+
+lb:
+  image: 'dockercloud/haproxy:latest'
+  links:
+    - fact_service1
+    - fact_service2
+  ports:
+    - '80:80'

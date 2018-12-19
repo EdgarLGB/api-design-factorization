@@ -2,6 +2,7 @@ import concurrent.futures
 import json
 import queue
 import random
+import os
 
 import redis
 from flask import Flask
@@ -9,10 +10,13 @@ from flask import request
 
 app = Flask(__name__)
 
-app.config.from_envvar('APP_SETTINGS')
-
 
 # ----------------------routes-----------------------------
+@app.route('/')
+def hello():
+    return 'Hello Factor app!\n'
+
+
 @app.route('/factor', methods=['POST'])
 def factorization():
     content = request.get_json()
@@ -39,7 +43,7 @@ def get_result(task_id):
 # ----------------------Factorization service--------------------
 
 q = queue.Queue()
-executor = concurrent.futures.ThreadPoolExecutor(max_workers=app.config["WORKER_NUM"])
+executor = concurrent.futures.ThreadPoolExecutor(max_workers=int(os.environ.get("WORKER_NUM")))
 service_executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
 
 
@@ -90,8 +94,8 @@ service_executor.submit(run)
 # ---------------------------------------------------
 
 # ------------------------Redis service------------------------------------
-redis_pool = redis.ConnectionPool(host=app.config["REDIS_HOST"], port=app.config["REDIS_PORT"], db=0,
-                                  max_connections=int(app.config["REDIS_MAX_CONN"]))
+redis_pool = redis.ConnectionPool(host=os.environ.get("REDIS_HOST"), port=os.environ.get("REDIS_PORT"), db=0,
+                                  max_connections=int(os.environ.get("REDIS_MAX_CONN")))
 
 
 def get_connection():
@@ -153,4 +157,4 @@ def factors(n):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0")

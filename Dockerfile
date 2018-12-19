@@ -14,4 +14,4 @@ RUN pip3 install -r requirements.txt
 
 COPY . /application
 
-ENTRYPOINT [ "./start.sh" ]
+CMD ["python3", "app/app.py"]
