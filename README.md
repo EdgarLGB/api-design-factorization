@@ -127,11 +127,12 @@ For the complete version, please go to [app.py][app.py]
 
 ## Building with docker
 
-Docker is used to deploy the infrastructure. In terms of loadbalancer, I leverage the [HAProxy][HAProxy] of version dockercloud 
+Docker is used to deploy the infrastructure. In terms of loadbalancer, I leverage the [HAProxy][HAProxy] of version [dockercloud][dockercloud]
 which is capable of auto configuring the IP of services. Here is the [docker-compose.yml][docker-compose.yml].
 
 ```bash
-$ docker-compose up // create the stack
+# create the stack
+$ docker-compose up
 ```
 
 ## Test
@@ -147,3 +148,9 @@ $ curl --header "Content-Type: application/json" \
 $ curl http://localhost/get/260511577
 
 ```
+
+[list]: https://github.com/EdgarLGB/api-design-factorization/blob/bf1c7fe22e4d8f6c3541cfca45bc553d1aa55c4b/requirements.txt#L1
+[app.py]: https://github.com/EdgarLGB/api-design-factorization/blob/bf1c7fe22e4d8f6c3541cfca45bc553d1aa55c4b/app/app.py#L1
+[HAProxy]: https://github.com/EdgarLGB/api-design-factorization/blob/bf1c7fe22e4d8f6c3541cfca45bc553d1aa55c4b/docker-compose.yml#L35
+[dockercloud]: https://github.com/docker/dockercloud-haproxy/tree/master
+[docker-compose.yml]: https://github.com/EdgarLGB/api-design-factorization/blob/bf1c7fe22e4d8f6c3541cfca45bc553d1aa55c4b/docker-compose.yml#L1
