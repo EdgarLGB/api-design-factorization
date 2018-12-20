@@ -4,7 +4,7 @@ redis:
     - 6379
 
 fact_service1:
-  image: 'factor_app'
+  image: 'lgb452721007/factor_app:v1'
   links:
     - redis
   expose:
@@ -18,7 +18,7 @@ fact_service1:
     - FLASK_DEBUG=1
 
 fact_service2:
-  image: 'factor_app'
+  image: 'lgb452721007/factor_app:v1'
   links:
     - redis
   expose:

@@ -154,3 +154,11 @@ $ curl http://localhost/get/260511577
 [HAProxy]: https://github.com/EdgarLGB/api-design-factorization/blob/bf1c7fe22e4d8f6c3541cfca45bc553d1aa55c4b/docker-compose.yml#L35
 [dockercloud]: https://github.com/docker/dockercloud-haproxy/tree/master
 [docker-compose.yml]: https://github.com/EdgarLGB/api-design-factorization/blob/bf1c7fe22e4d8f6c3541cfca45bc553d1aa55c4b/docker-compose.yml#L1
+
+
+## TODO
+
+* Refactor the Flask app into various module
+* Make API stateless, i.e., use Redis as the task queue
+* Auto-discovery for loadbalancer by using [Envoy](https://www.envoyproxy.io/docs/envoy/latest/start/sandboxes/front_proxy)
+* Make the service image less heavy
