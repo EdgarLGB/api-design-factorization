@@ -4,7 +4,7 @@ redis:
     - 6379
 
 fact_service1:
-  image: 'lgb452721007/factor_app:v1'
+  image: 'lgb452721007/factor_app:v2'
   links:
     - redis
   expose:
@@ -14,11 +14,11 @@ fact_service1:
     - REDIS_HOST=redis
     - REDIS_PORT=6379
     - REDIS_MAX_CONN=5
-    - FLASK_APP=app/app.py
-    - FLASK_DEBUG=1
+    - FLASK_APP=factor_app
+    - FLASK_ENV=development
 
 fact_service2:
-  image: 'lgb452721007/factor_app:v1'
+  image: 'lgb452721007/factor_app:v2'
   links:
     - redis
   expose:
@@ -28,8 +28,8 @@ fact_service2:
     - REDIS_HOST=redis
     - REDIS_PORT=6379
     - REDIS_MAX_CONN=5
-    - FLASK_APP=app/app.py
-    - FLASK_DEBUG=1
+    - FLASK_APP=factor_app
+    - FLASK_ENV=development
 
 lb:
   image: 'dockercloud/haproxy:latest'
